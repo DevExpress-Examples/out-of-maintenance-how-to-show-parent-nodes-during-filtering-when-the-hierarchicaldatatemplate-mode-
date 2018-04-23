@@ -1,0 +1,29 @@
+﻿<Window x:Class="TreeListFilter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dxt="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:local="clr-namespace:TreeListFilter"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <HierarchicalDataTemplate DataType="{x:Type local:Employee}" ItemsSource="{Binding Employees}">
+            <ContentPresenter x:Name="defaultRowPresenter" Content="{Binding}" ContentTemplate="{Binding View.DefaultDataRowTemplate}" />
+        </HierarchicalDataTemplate>
+    </Window.Resources>
+    <Grid>
+        <dxt:TreeListControl Name="treeList">
+            <dxt:TreeListControl.Columns>
+                <dxt:TreeListColumn x:Name="col" FieldName="Name" Header="Employee Name" 
+                                  AutoFilterCondition="Contains" AllowAutoFilter="True" />
+            </dxt:TreeListControl.Columns>
+            <dxt:TreeListControl.View>
+                <dxt:TreeListView Name="treeListView1" AutoWidth="True" CustomNodeFilter="treeListView1_CustomNodeFilter_1"
+                                  TreeDerivationMode="HierarchicalDataTemplate"
+                                  ChildNodesPath="Employees"
+                                  ShowAutoFilterRow="True">
+                </dxt:TreeListView>
+            </dxt:TreeListControl.View>
+        </dxt:TreeListControl>
+
+    </Grid>
+</Window>
